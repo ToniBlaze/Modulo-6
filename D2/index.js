@@ -33,6 +33,14 @@ app.put('/blogPosts/:id', postsControllers.updatePost);
 app.delete('/blogPosts/:id', postsControllers.deletePost);
 
 
+function errorHandler(error, request, response, next) {
+    const e = error.toString();
+    console.error("Middleware di Errore: " + e);
+    return response.status(500).send(e);
+}
+
+app.use(errorHandler);
+
 async function start() {
     try {
         await mongoose.connect('mongodb+srv://alessiotoninello:2Y3595DtzKIPhDEH@firstdb.xzwjsk8.mongodb.net/');
