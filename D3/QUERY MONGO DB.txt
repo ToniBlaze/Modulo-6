@@ -1,0 +1,29 @@
+QUERY MONGO DB
+
+cerca utenti attivi:
+{isActive: true} 
+
+
+cerca utenti con eta maggiore di 26
+{age: {$gt: 26}}
+
+
+utenti maggiori di 26 minore/uguale 30:
+{$and: [{age: {$gt: 26}}, {age:{$lte: 30}}]}
+
+
+utenti con occhi marroni OPPURE blu:
+{eyeColor: {$in: ["brown","blue"]}}
+{$or:[{eyeColor:"brown"},{eyeColor:"blue"}]}
+
+
+mostra utenti che NON APPERTENGONO alla query:
+{eyeColor: {$ne: "green"}}
+
+
+Mostrare solo i campi desiderati dell'oggetto:
+le condizioni in "FILTER" & in "PROJECT": {email: 1}
+
+
+
+
