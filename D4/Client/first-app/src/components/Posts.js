@@ -4,6 +4,7 @@ import SinglePost from "./SinglePost";
 
 export default function Posts({ data }) {
   console.log(data);
+    
   return (
     <Container>
       <Row>

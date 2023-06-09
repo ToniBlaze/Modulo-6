@@ -5,11 +5,10 @@ import axios from 'axios';
 import Posts from './components/Posts';
 
 
-
-
 function App() {
   const [data, setData ] = useState("")
-
+ 
+  
   useEffect(() => {
     axios.get('http://localhost:3000/posts')
       .then(res => {
