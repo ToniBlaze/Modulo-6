@@ -8,12 +8,12 @@ export default function MyNav() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
     <Container>
-      <Navbar.Brand className="me-4" href="#home">Posts</Navbar.Brand>
+      <Navbar.Brand className="me-4" href="/">Posts</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link to="/">Home</Nav.Link>
-          <Nav.Link to="/about">About</Nav.Link>
+          <Link className='nav-link' to="/">Home</Link>
+          <Link className='nav-link' to="/about">About</Link>
         </Nav>
       </Navbar.Collapse>
     </Container>

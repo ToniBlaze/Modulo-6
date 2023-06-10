@@ -4,12 +4,13 @@ import SinglePost from "./SinglePost";
 
 export default function Posts({ data }) {
   console.log(data);
-    
+  const dataArray = Object.values(data);
+
   return (
     <Container>
       <Row>
-        {data.map((post, i) => (
-          <SinglePost post={post} key={i} />
+        {dataArray.map((post) => (
+          <SinglePost post={post} key={post._id} />
         ))}
       </Row>
     </Container>
