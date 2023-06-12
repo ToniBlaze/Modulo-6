@@ -13,7 +13,7 @@ export default function SinglePost({ post }) {
     <Col className="my-5" xs={11}>
       <Card className="d-flex flex-row flex-wrap">
         <Col xs={12} md={4} style={{ maxHeight: "250px" , minHeight: "250px"}}>
-        <Card.Img  className="img-fluid h-100" variant="left" src={post.cover} />
+        <Card.Img  className="img-fluid w-100 h-100" variant="left" src={post.cover} />
         </Col>
         <Col xs={8}>
           <Card.Body>

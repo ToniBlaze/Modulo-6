@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-
-
+import CommentArea from "../components/CommentArea"
 
 //PAGINA (ROUTE) PRINCIPALE DEL LIBRO
 export default function PostDetails() {
@@ -19,26 +19,61 @@ export default function PostDetails() {
   //Prendi "ID" da paramentro della ROUTE
   let { id } = useParams();
 
+  const [post, setPost] = useState(null);
+  const [comments, setComments] = useState(null);
+
+  // Chiamata per Dati del POST
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/posts/${id}`)
+      .then((res) => {
+        setPost(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
 
   return (
     <Container fluid>
-      <Row>
-        <Col className="my-5">
+      <Button className="px-4 py-2 my-4 btn-secondary" onClick={backToHome}>
+        Back to Home
+      </Button>
+      {post && (
+        <>
           <Row>
-            <div>
-              {id}
-            </div>
-          </Row>
-          <Button className="px-4 py-2 my-4 btn-secondary" onClick={backToHome}>
-            Back to Home
-          </Button>
-          <Row>
-            <Col xs={12}>
-              {/* Qua ci andra la commentArea */}
+            <Col className="my-5">
+              <Row>
+                <h1 className="mb-4">{post.titolo}</h1>
+                <Col sm={4} className="mx-0">
+                  <img
+                    className="img-fluid img-custom-book-details"
+                    src={post.cover}
+                    alt="img-post"
+                  />
+                </Col>
+                <Col sm={7}>
+                  <h4 className="mt-3">
+                    Autore: <b>{post.author.name}</b>
+                  </h4>
+                  <h4 className="mt-3">
+                    Categoria: <b>{post.category}</b>
+                  </h4>
+
+                  <p className="text-secondary mt-3">
+                    <i>{post.content}</i>
+                  </p>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col xs={12}><CommentArea id={id}/></Col>
+              </Row>
             </Col>
           </Row>
-        </Col>
-      </Row>
+        </>
+      )}
     </Container>
   );
 }
