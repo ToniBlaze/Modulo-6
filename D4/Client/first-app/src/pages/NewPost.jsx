@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 
 
 export default function NewPost() {
@@ -10,7 +10,7 @@ export default function NewPost() {
 
        //Torna ad Home
    const backToHome = () => {
-    Navigate("/");
+    navigate("/");
     window.scrollTo(0, 0);
   };
 
@@ -27,12 +27,11 @@ export default function NewPost() {
 
     }
 
-    const handleSubmit =()=>{
+    const handleSubmit =(e)=>{
+        e.preventDefault()
         axios.post("http://localhost:3000/posts", obj)
-        .then(response => {navigate("/")})
+        .then(response => Navigate("/"))
     }
-
-
 
 
     return (
