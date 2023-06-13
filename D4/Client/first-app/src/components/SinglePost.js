@@ -17,14 +17,14 @@ export default function SinglePost({ post, deletePost }) {
             <Card.Title>{post.titolo}</Card.Title>
             <Card.Text>
               <p>Categoria: <b>{post.category}</b></p>
-              <p>Autore: <b>{post.author.avatar}</b></p>
+              <p>Autore: <b>{post.author.name}</b></p>
               <p>Tempo lettura: {post.readTime.value} {post.readTime.unit}</p>
             </Card.Text>
             <Link className="text-decoration-none text-light"
               to={`/post/${post._id}`}>
-              <Button variant="primary">Leggi post</Button>
+              <Button variant="primary mx-3">Leggi post</Button>
             </Link>
-            <Button variant="danger" onClick={deletePost(post._id)}>Elimina</Button>
+            <Button variant="danger" onClick={() => deletePost(post._id)}>Elimina</Button>
           </Card.Body>
         </Col>
       </Card>
