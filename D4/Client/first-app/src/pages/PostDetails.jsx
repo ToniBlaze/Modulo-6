@@ -20,7 +20,6 @@ export default function PostDetails() {
   let { id } = useParams();
 
   const [post, setPost] = useState(null);
-  const [comments, setComments] = useState(null);
 
   // Chiamata per Dati del POST
   useEffect(() => {
@@ -32,7 +31,7 @@ export default function PostDetails() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [id]);
 
 
   return (

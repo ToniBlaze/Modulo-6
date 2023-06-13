@@ -14,6 +14,7 @@ export default function MyNav() {
         <Nav className="me-auto">
           <Link className='nav-link' to="/">Home</Link>
           <Link className='nav-link' to="/about">About</Link>
+          <Link className='nav-link px-4' to="/newpost">New Post</Link>
         </Nav>
       </Navbar.Collapse>
     </Container>
