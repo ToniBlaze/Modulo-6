@@ -8,7 +8,6 @@ import SinglePost from "./SinglePost";
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
-
   useEffect(() => {
     axios
       .get("http://localhost:3000/posts")
@@ -24,9 +23,7 @@ export default function Posts() {
       })
       .catch((err) => console.log(err));
   }
-
   // const dataArray = Object.values(data);
-
   return (
     <Container>
       <Row>

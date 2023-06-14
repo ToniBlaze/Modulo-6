@@ -1,18 +1,16 @@
 const mongoose = require("mongoose");
 
-
 // Comment Schema
 const commentSchema = new mongoose.Schema({
-    author: {
-      type: String,
-      required: true,
-    },
-    content: {
-      type: String,
-      required: true,
-    },
-  });
-
+  author: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+});
 
 // Post Schema
 const postsSchema = new mongoose.Schema({
@@ -40,10 +38,8 @@ const postsSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  comment: [commentSchema]
+  comment: [commentSchema],
 });
-
-
 
 // Mongoose Model
 const postModel = mongoose.model("Post", postsSchema);
