@@ -1,6 +1,9 @@
+const mongoose = require("mongoose");
+
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
+const multer = require('multer');
 
 const app = express();
 
@@ -10,6 +13,8 @@ app.use(express.json());
 
 const debug = require("./middlewares/debug")
 app.use(debug.logUrl);
+
+
 
 // Models
 const userModel = require("./models/Users")
@@ -23,6 +28,7 @@ app.use(endPointsUsers);
 const endPointsPosts = require("./endpoints/Posts_EndPoints")
 app.use(endPointsPosts);
 
+// EndPoints Comments
 const endPointsComments = require("./endpoints/Comments_EndPoints")
 app.use(endPointsComments);
 

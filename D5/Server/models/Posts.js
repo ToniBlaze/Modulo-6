@@ -24,7 +24,7 @@ const postsSchema = new mongoose.Schema({
   },
   cover: {
     type: String,
-    require: true,
+    require: false,
   },
   readTime: {
     value: { type: Number, require: true },

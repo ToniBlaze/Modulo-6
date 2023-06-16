@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+
 export default function NewPost() {
   const [obj, setObj] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
 
   //Torna ad Home
@@ -25,14 +27,35 @@ export default function NewPost() {
     console.log(e.target.name);
   };
 
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    axios.post("http://localhost:3000/posts", obj).then((res) => {
-      console.log(res);
-      navigate("/");
+    const data = new FormData();
+    data.append("uploadFile", selectedFile);
+
+    axios
+    .post("http://localhost:3000/upload", data)
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((error) => {
+      console.log(error);
     });
+
+    axios
+      .post("http://localhost:3000/posts", obj)
+      .then((res) => {
+        console.log(res.data);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -107,10 +130,10 @@ export default function NewPost() {
           <Form.Label className="mt-4 mb-2">Carica una immagine:</Form.Label>
           <Form.Control
             className="text-center"
-            onChange={handlerChange}
-            type="text"
-            name="cover"
-            placeholder="metti URL immagine..."
+            onChange={handleFileChange}
+            type="file"
+            name="uploadFile" 
+            placeholder="Carica file..."
           />
         </Form.Group>
         <Button
