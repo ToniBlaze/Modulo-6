@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 
-export default function ChangeComment({ postId, commentId, setCommentsCount, item }) {
+export default function AddComment({ postId, setCommentsCount }) {
   const [show, setShow] = useState(false);
   const [obj, setObj] = useState({});
 
@@ -36,7 +36,7 @@ export default function ChangeComment({ postId, commentId, setCommentsCount, ite
     e.stopPropagation();
 
     axios
-      .put(`http://localhost:3000/posts/${postId}/comments/${commentId}`, obj)
+      .post(`http://localhost:3000/posts/${postId}`, obj)
       .then((res) => {
         console.log(res);
         setCommentsCount((prevCount) => prevCount + 1);
@@ -48,8 +48,8 @@ export default function ChangeComment({ postId, commentId, setCommentsCount, ite
 
   return (
     <div>
-      <Button className="ms-3" variant="primary" onClick={handleShow}>
-        Modifica
+      <Button variant="primary" onClick={handleShow}>
+        Aggiungi commento
       </Button>
 
       {/* MODALE */}
@@ -71,7 +71,7 @@ export default function ChangeComment({ postId, commentId, setCommentsCount, ite
                 className="input-text"
                 type="text"
                 name="author"
-                placeholder={item.author}
+                placeholder="autore commento"
                 onChange={handlerChange}
                 onClick={(e) => e.stopPropagation()}
               />
@@ -83,7 +83,7 @@ export default function ChangeComment({ postId, commentId, setCommentsCount, ite
                 className="input-text"
                 type="text"
                 name="content"
-                placeholder={item.content}
+                placeholder="scrivi commento.."
                 onChange={handlerChange}
                 onClick={(e) => e.stopPropagation()}
               />

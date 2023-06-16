@@ -4,9 +4,9 @@ import ChangeComment from "./ChangeComment";
 export default function SingleComment({ item, key, postId, deleteComment, setCommentsCount }) {
   
     return (
-      <Container className="my-4 p-1" key={key}>
-        <Row className="border-custom py-3 comments-border">
-          <Col xs={9} className="d-flex align-items-center">
+      <Container className="my-4 p-1" index={key}>
+        <Row className="border-custom py-2 comments-border flex-wrap">
+          <Col xs={12} md={9} className="d-flex align-items-center">
             <Col>
               Autore: <b className="text-secondary">{item.author}</b>
             </Col>
@@ -15,8 +15,8 @@ export default function SingleComment({ item, key, postId, deleteComment, setCom
             </Col>
           </Col>
           <Col
-            className="d-flex align-items-center justify-content-center"
-            xs={3}>
+            className="d-flex align-items-center justify-content-center my-3"
+            xs={12} md={3}>
             <Button
              onClick={() => deleteComment(postId, item._id)}
               className="btn btn-danger">

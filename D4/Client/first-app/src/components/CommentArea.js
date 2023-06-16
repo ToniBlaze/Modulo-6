@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SingleComment from "./SingleComment";
+import AddComment from "./AddComment";
 
 export default function CommentArea({ id }) {
   const [comments, setComments] = useState([]);
@@ -12,7 +13,6 @@ export default function CommentArea({ id }) {
     axios
       .get(`http://localhost:3000/posts/${id}/comments`)
       .then((res) => {
-        console.log(res.data);
         setComments(res.data);
       })
       .catch((err) => {
@@ -31,7 +31,10 @@ export default function CommentArea({ id }) {
   return (
     <div>
       <hr></hr>
+      <div>
       <p className="text-black fs-4 fw-semibold mb-0">Recensioni:</p>
+      <AddComment postId={postId} setCommentsCount={setCommentsCount}/>
+      </div>
       {comments.map((item, index) => (
         <SingleComment item={item} key={index} postId={postId} deleteComment={deleteComment} setCommentsCount={setCommentsCount}/>
       ))}
