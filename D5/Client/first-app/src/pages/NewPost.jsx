@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-
 export default function NewPost() {
   const [obj, setObj] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
@@ -39,23 +38,31 @@ export default function NewPost() {
     data.append("uploadFile", selectedFile);
 
     axios
-    .post("http://localhost:3000/upload", data)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
-    axios
-      .post("http://localhost:3000/posts", obj)
+      .post("http://localhost:3000/upload", data)
       .then((res) => {
-        console.log(res.data);
-        navigate("/");
+        //Setta URL immagine uploadata come URL immagine del Post 
+        const newObj = {
+          ...obj,
+          cover: res.data.path,
+        };
+
+        // Chiamata POST per inserire oggetto nel DB
+        return axios
+        .post("http://localhost:3000/posts", newObj)
+        .then((res) => {
+          console.log(res.data);
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
       })
       .catch((error) => {
         console.log(error);
       });
+
+
   };
 
   return (
@@ -132,7 +139,7 @@ export default function NewPost() {
             className="text-center"
             onChange={handleFileChange}
             type="file"
-            name="uploadFile" 
+            name="uploadFile"
             placeholder="Carica file..."
           />
         </Form.Group>
