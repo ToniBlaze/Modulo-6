@@ -19,6 +19,10 @@ app.use(debug.logUrl);
 const userModel = require("./models/Users")
 const postModel= require("./models/Posts")
 
+// Endpoints
+const AuthEndpoints = require('./endpoints/Auth');
+app.use(AuthEndpoints);
+
 // EndPoints Email
 const endPointsEmail = require("./endpoints/Email_EndPoints")
 app.use(endPointsEmail);
