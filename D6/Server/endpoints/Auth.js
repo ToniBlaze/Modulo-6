@@ -9,10 +9,9 @@ const saltRounds = 10;
 const jwtSecretKey = process.env.APP_JWT_SECRET_KEY;
 
 // Models
-const UserModel = require('../models/UserModel')
+const UserModel = require('../models/Users')
 
 // Auth Endpoints
-
 routers.post('/register', (req, res, next) => {
     const password = req.body.password;
 

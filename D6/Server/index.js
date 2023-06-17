@@ -19,7 +19,7 @@ app.use(debug.logUrl);
 const userModel = require("./models/Users")
 const postModel= require("./models/Posts")
 
-// Endpoints
+// Endpoints Autorizzazione
 const AuthEndpoints = require('./endpoints/Auth');
 app.use(AuthEndpoints);
 
