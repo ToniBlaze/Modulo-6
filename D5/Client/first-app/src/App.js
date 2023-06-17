@@ -9,6 +9,7 @@ import NewPost from "./pages/NewPost";
 // COMPONENTS
 import MyNav from "./components/MyNav";
 import Posts from "./components/Posts";
+import Newsletter from "./components/Newsletter";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             element={
               <>
                 <MyNav />
+                <Newsletter />
                 <Posts />
               </>
             }

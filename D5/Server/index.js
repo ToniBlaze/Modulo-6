@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const express = require("express");
 const cors = require("cors");
 const multer = require('multer');
+require('dotenv').config()
 
 const app = express();
 
@@ -15,10 +15,13 @@ const debug = require("./middlewares/debug")
 app.use(debug.logUrl);
 
 
-
 // Models
 const userModel = require("./models/Users")
 const postModel= require("./models/Posts")
+
+// EndPoints Email
+const endPointsEmail = require("./endpoints/Email_EndPoints")
+app.use(endPointsEmail);
 
 // EndPoints Users
 const endPointsUsers = require("./endpoints/Users_EndPoints")
@@ -36,7 +39,7 @@ app.use(endPointsComments);
 app.use(debug.errorHandler);
 
 mongoose
-    .connect('mongodb+srv://alessiotoninello:2Y3595DtzKIPhDEH@firstdb.xzwjsk8.mongodb.net/D4')
+    .connect(process.env.MONGODB_APIKEY)
     .then(response => {
         console.log("DB Connected...");
         app.listen(3000, async () => console.log("Server listening on port " + 3000))
