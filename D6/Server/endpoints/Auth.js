@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
 const saltRounds = 10;
-//const bcriptPassword = process.env.APP_PASSWORD_BCRIPT;
+const bcriptPassword = process.env.APP_PASSWORD_BCRIPT;
 const jwtSecretKey = process.env.APP_JWT_SECRET_KEY;
 
 // Models
@@ -55,7 +55,6 @@ routers.post('/login', async (req, res, next) => {
             {expiresIn : '1h'});
             return res.status(200).json(token)
     }
-    console.log(user)
 })
 
 routers.post('/autologin', (req, res, next) => {

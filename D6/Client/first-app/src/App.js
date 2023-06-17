@@ -10,6 +10,7 @@ import NewPost from "./pages/NewPost";
 import MyNav from "./components/MyNav";
 import Posts from "./components/Posts";
 import Newsletter from "./components/Newsletter";
+import Register from "./pages/Register";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
           <Route path="/post/:id" element={<PostDetails />} />
           <Route path="/newpost" element={<NewPost />}/>
+          <Route path="/register" element={<Register />}/>
         </Routes>
       </BrowserRouter>
     </div>
