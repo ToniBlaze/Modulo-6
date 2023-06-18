@@ -47,4 +47,4 @@ mongoose
     .then(response => {
         console.log("DB Connected...");
         app.listen(3000, async () => console.log("Server listening on port " + 3000))
-    }).catch(err => console.log(err))
+    }).catch(err => console.error(err))
