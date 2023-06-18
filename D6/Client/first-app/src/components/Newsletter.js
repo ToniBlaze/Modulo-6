@@ -26,7 +26,6 @@ export default function Newsletter() {
       ...obj,
       [name]: value,
     });
-    console.log(e.target.name);
   };
 
   // GESTISCI INVIO FORM
@@ -35,7 +34,6 @@ export default function Newsletter() {
     e.stopPropagation();
 
     axios.post(`http://localhost:3000/mail`, obj).then((res) => {
-      console.log(res);
       handleClose();
     });
   }

@@ -11,13 +11,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+// Models
+const userModel = require("./models/Users")
+const postModel = require("./models/Posts")
+
+
 const debug = require("./middlewares/debug")
 app.use(debug.logUrl);
 
 
-// Models
-const userModel = require("./models/Users")
-const postModel= require("./models/Posts")
 
 // Endpoints Autorizzazione
 const AuthEndpoints = require('./endpoints/Auth');

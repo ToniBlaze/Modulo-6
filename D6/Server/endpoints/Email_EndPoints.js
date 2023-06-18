@@ -17,8 +17,8 @@ router.post('/mail', async (req, res) => {
 
   try {
     const response = await sgMail.send(msg);
-    console.log(response[0].statusCode);
-    console.log(response[0].headers);
+    // console.log(response[0].statusCode);
+    // console.log(response[0].headers);
     res.status(response[0].statusCode).json({ ...response });
   } catch (error) {
     console.error(error);

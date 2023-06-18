@@ -11,6 +11,7 @@ import MyNav from "./components/MyNav";
 import Posts from "./components/Posts";
 import Newsletter from "./components/Newsletter";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/post/:id" element={<PostDetails />} />
           <Route path="/newpost" element={<NewPost />}/>
           <Route path="/register" element={<Register />}/>
+          <Route path="/login" element={<Login />}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -8,28 +8,39 @@ export default function NewPost() {
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
 
-  //Torna ad Home
+  useEffect(() => {
+    verifyToken();
+  }, []);
+
+  // Verifica la presenza del token nel localStorage
+  const verifyToken = () => {
+    const token = localStorage.getItem("userLogin");
+    if (!token) {
+      navigate("/login");
+    }
+  };
+
+  //Torna alla Home
   const backToHome = () => {
     navigate("/");
     window.scrollTo(0, 0);
   };
 
-  // PRENDI I DATI DEL FORM
-  const handlerChange = (e) => {
-    //verifica i value in tutti gli input e restituisce il valore
-    let { name, value } = e.target;
+  // Gestore del cambio di input
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setObj({
       ...obj,
       [name]: value,
     });
-
-    console.log(e.target.name);
   };
 
+  // Gestore del cambio di file
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
 
+  // Gestore dell'invio del modulo
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -40,29 +51,26 @@ export default function NewPost() {
     axios
       .post("http://localhost:3000/upload", data)
       .then((res) => {
-        //Setta URL immagine uploadata come URL immagine del Post 
+        // Setta l'URL dell'immagine uploadata come URL dell'immagine del post
         const newObj = {
           ...obj,
           cover: res.data.path,
         };
 
-        // Chiamata POST per inserire oggetto nel DB
+        // Chiamata POST per inserire l'oggetto nel database
         return axios
-        .post("http://localhost:3000/posts", newObj)
-        .then((res) => {
-          console.log(res.data);
-          navigate("/");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
+          .post("http://localhost:3000/posts", newObj)
+          .then((res) => {
+            console.log(res.data);
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
       });
-
-
   };
 
   return (
@@ -76,7 +84,7 @@ export default function NewPost() {
           <Form.Label className="mt-4 mb-2">Chi è l'autore?</Form.Label>
           <Form.Control
             className="text-center"
-            onChange={handlerChange}
+            onChange={handleChange}
             type="text"
             name="author.name"
             placeholder="Autore del post..."
@@ -86,55 +94,51 @@ export default function NewPost() {
           <Form.Label className="mt-4 mb-2">Tempo di lettura?</Form.Label>
           <Form.Control
             className="text-center"
-            onChange={handlerChange}
+            onChange={handleChange}
             type="text"
             name="readTime.value"
-            placeholder="inserisci un numero"
+            placeholder="Inserisci un numero"
           />
           <Form.Control
             className="text-center"
-            onChange={handlerChange}
+            onChange={handleChange}
             type="text"
             name="readTime.unit"
-            placeholder="secondi, minuti..."
+            placeholder="Secondi, minuti..."
           />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label className="mt-4 mb-2">Che argomento tratta?</Form.Label>
           <Form.Control
             className="text-center"
-            onChange={handlerChange}
+            onChange={handleChange}
             type="text"
             name="category"
             placeholder="Categoria del post..."
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label className="mt-4 mb-2">
-            Quale è il titolo del Post?
-          </Form.Label>
+          <Form.Label className="mt-4 mb-2">Quale è il titolo del Post?</Form.Label>
           <Form.Control
             className="text-center"
-            onChange={handlerChange}
+            onChange={handleChange}
             type="text"
             name="titolo"
             placeholder="Titolo del post..."
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label className="mt-4 mb-2">
-            Scrivi il contenuto del tuo post:
-          </Form.Label>
+          <Form.Label className="mt-4 mb-2">Scrivi il contenuto del tuo post:</Form.Label>
           <Form.Control
             className="text-center"
-            onChange={handlerChange}
+            onChange={handleChange}
             type="text"
             name="content"
             placeholder="Contenuto del post..."
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label className="mt-4 mb-2">Carica una immagine:</Form.Label>
+          <Form.Label className="mt-4 mb-2">Carica un'immagine:</Form.Label>
           <Form.Control
             className="text-center"
             onChange={handleFileChange}
@@ -147,7 +151,8 @@ export default function NewPost() {
           className="mt-4"
           onClick={handleSubmit}
           variant="primary"
-          type="button">
+          type="button"
+        >
           Invia
         </Button>
       </Form>
