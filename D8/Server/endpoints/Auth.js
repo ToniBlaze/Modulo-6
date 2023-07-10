@@ -61,7 +61,21 @@ routers.post("/login", async (req, res, next) => {
   }
 });
 
+routers.post("/autologin", (req, res, next) => {});
 
+routers.get("/fblogin", passport.authenticate("facebook"));
+
+routers.get(
+  "/redirect/facebook",
+  passport.authenticate("facebook", {
+    failureRedirect: "/register",
+    failureMessage: true,
+  }),
+  function (req, res) {
+    // Aggiungo il token JWT
+    res.redirect("/");
+  }
+);
 
 // Export routers
 module.exports = routers;
